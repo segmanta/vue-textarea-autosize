@@ -1,6 +1,6 @@
 /*!
  * vue-textarea-autosize v1.1.1 
- * (c) 2019 Saymon
+ * (c) 2022 Saymon
  * Released under the MIT License.
  */
 'use strict';
@@ -12,10 +12,11 @@
 //
 //
 //
+//
 var script = {
   name: 'TextareaAutosize',
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ''
     },
@@ -72,7 +73,7 @@ var script = {
     }
   },
   watch: {
-    value: function value(val) {
+    modelValue: function modelValue(val) {
       this.val = val;
     },
     val: function val(_val) {
@@ -96,7 +97,7 @@ var script = {
       var important = this.isHeightImportant ? 'important' : '';
       this.height = "auto".concat(important ? ' !important' : '');
       this.$nextTick(function () {
-        var contentHeight = _this.$el.scrollHeight + 1;
+        var contentHeight = _this.$refs.textarea.scrollHeight + 1;
 
         if (_this.minHeight) {
           contentHeight = contentHeight < _this.minHeight ? _this.minHeight : contentHeight;
@@ -118,7 +119,7 @@ var script = {
     }
   },
   created: function created() {
-    this.val = this.value;
+    this.val = this.modelValue;
   },
   mounted: function mounted() {
     this.resize();
@@ -214,7 +215,7 @@ var normalizeComponent_1 = normalizeComponent;
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.val),expression:"val"}],style:(_vm.computedStyles),domProps:{"value":(_vm.val)},on:{"focus":_vm.resize,"input":function($event){if($event.target.composing){ return; }_vm.val=$event.target.value;}}})};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.val),expression:"val"}],ref:"textarea",style:(_vm.computedStyles),domProps:{"value":(_vm.val)},on:{"focus":_vm.resize,"input":function($event){if($event.target.composing){ return; }_vm.val=$event.target.value;}}})};
 var __vue_staticRenderFns__ = [];
 
   /* style */
