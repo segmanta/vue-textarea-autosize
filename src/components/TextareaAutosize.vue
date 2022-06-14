@@ -2,6 +2,7 @@
   <textarea
     :style="computedStyles"
     v-model="val"
+    ref="textarea"
     @focus="resize"
   ></textarea>
 </template>
@@ -9,7 +10,7 @@
 export default {
   name: 'TextareaAutosize',
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ''
     },
@@ -65,7 +66,7 @@ export default {
     }
   },
   watch: {
-    value (val) {
+    modelValue (val) {
       this.val = val
     },
     val (val) {
@@ -87,7 +88,7 @@ export default {
       const important = this.isHeightImportant ? 'important' : ''
       this.height = `auto${important ? ' !important' : ''}`
       this.$nextTick(() => {
-        let contentHeight = this.$el.scrollHeight + 1
+        let contentHeight = this.$refs.textarea.scrollHeight + 1
 
         if (this.minHeight) {
           contentHeight = contentHeight < this.minHeight ? this.minHeight : contentHeight
@@ -110,7 +111,7 @@ export default {
     }
   },
   created () {
-    this.val = this.value
+    this.val = this.modelValue
   },
   mounted () {
     this.resize()
